@@ -19,21 +19,20 @@ LABEL com.linuxforhealth.license_terms="https://www.apache.org/licenses/LICENSE-
 LABEL summary="Linux For Health JDK Image"
 LABEL description="Provides support for Linux for HealthJDK based applications"
 
-ARG JDK_PACKAGE_NAME=java-11-openjdk
-
 RUN microdnf update -y && \
     microdnf install -y shadow-utils \
-    ca-certificates \
-    ${JDK_PACKAGE_NAME} && \
-    microdnf clean all
+    ca-certificates
 
 ENV JAVA_HOME=/usr/lib/jvm/jre
-
 ENV APP_ROOT=/opt/lfh
 ENV JAVA_OPTIONS="-XX:+UseContainerSupport"
 ENV USER_ID=1001
 
 RUN mkdir -p ${APP_ROOT}
+
+ARG JDK_PACKAGE_NAME=java-11-openjdk    
+RUN microdnf install -y ${JDK_PACKAGE_NAME} && \
+    microdnf clean all
 
 RUN useradd -u ${USER_ID} -r -g 0 \
             -s /sbin/nologin \
