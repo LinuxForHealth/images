@@ -37,5 +37,6 @@ RUN mkdir -p ${APP_ROOT}
 
 RUN useradd -u ${USER_ID} -r -g 0 \
             -s /sbin/nologin \
-            -c "Default Application User" default && \
-            chown -R ${USER_ID}:0 ${APP_ROOT}
+            -c "Default Application User" default
+
+RUN chown -R ${USER_ID}:0 ${APP_ROOT}
