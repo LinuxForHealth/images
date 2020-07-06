@@ -1,4 +1,4 @@
-FROM registry.redhat.io/ubi8/ubi-minimal:8.2
+FROM registry.redhat.io/ubi8/ubi-minimal:latest
 
 LABEL maintainer="Linux for Health"
 LABEL com.linuxforhealth.component="base-image"
