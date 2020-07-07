@@ -1,5 +1,11 @@
-FROM registry.redhat.io/ubi8/ubi-minimal:latest
+# Linux for Health Base Image
+# Builds a base image for use by Linux for Health applications and services
+#
+# Environment variables:
+# - APP_ROOT: The root application directory. Defaults to /opt/lfh.
+# - USER_ID: The USER ID used for the non-privileged "application" account. Defaults to 1001.
 
+FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 LABEL maintainer="Linux for Health"
 LABEL com.linuxforhealth.component="base-image"
 LABEL name="base-image"
@@ -11,3 +17,13 @@ RUN microdnf update -y && \
     microdnf install -y shadow-utils \
     ca-certificates && \
     microdnf clean all
+
+ENV APP_ROOT=/opt/lfh
+ENV USER_ID=1001
+
+RUN mkdir -p ${APP_ROOT}
+RUN useradd -u ${USER_ID} -r -g 0 \
+            -s /sbin/nologin \
+            -c "Default Application User" default
+
+RUN chown -R ${USER_ID}:0 ${APP_ROOT}
