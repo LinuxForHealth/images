@@ -1,6 +1,8 @@
 # Linux for Health Kafka "stand-alone" iamge.
 #
-# This image provides a "stand-alone" bundled Kafka/ZooKeeper implementation for non-production use.
+# This image provides a "stand-alone" Kafka implementation for non-production use.
+# Zookeeper is not bundled with this image. Zookeeper connection information is provided
+# via the KAFKA_ZOOKEEPER_CONNECT environment variable.
 #
 # Build arguments:
 # - KAFKA_RELEASE_URL: The URL for the target Kafka release
@@ -9,21 +11,24 @@
 # - APP_ROOT: The root application directory. Set in base image.
 # - USER_ID: The USER ID used for the non-privileged "application" account. Set in base image.
 # - JAVA_HOME: The Java installation directory. Set in base image.
-# - STARTUP_INTERVAL: The number of seconds to wait between starting ZooKeeper and Kafka. Defaults to 5 seconds.
+# - KAFKA_ZOOKEEPER_CONNECT: Specifies the Zookeeper host and port (maps to zookeeper.connect property)
+# - KAFKA_LISTENERS: Broker listening addresses (maps to listeners property)
+# - KAFKA_ADVERTISED_LISTENERS:  The Kafka listener metadata passed back to clients (maps to advertised.listeners)
+# - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: Specifies the protocol used for each listener (maps to listener.security.protocol.map)
+# - KAFKA_INTER_BROKER_LISTENER_NAME:  The listener used for internal connections (inter.broker.listener.name)
 
-FROM registry.access.redhat.com/ubi8/ubi-minimal:latest AS builder
+FROM docker.io/linuxforhealth/base:1.0.0  AS builder
 
 ARG KAFKA_RELEASE_URL=https://apache.osuosl.org/kafka/2.5.0/kafka_2.12-2.5.0.tgz
 
 RUN microdnf install -y wget tar gzip && \
     microdnf clean all
 
-USER 1001
-
 RUN mkdir -p /tmp/kafka
 WORKDIR /tmp
 RUN wget ${KAFKA_RELEASE_URL} -O /tmp/kafka.tgz && \
     tar -xzf kafka.tgz -C kafka --strip-components 1
+COPY lfh-kafka-start.sh /tmp/kafka/bin
 
 FROM docker.io/linuxforhealth/openjdk:11
 
@@ -37,19 +42,26 @@ LABEL description="Provides a standalone deployment for non-production use"
 ENV APP_ROOT=${APP_ROOT}
 ENV USER_ID=${USER_ID}
 ENV JAVA_HOME=${JAVA_HOME}
-ENV STARTUP_INTERVAL=5
 
-USER 1001
+ENV KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+ENV KAFKA_LISTENERS=PLAINTEXT://:9092
+ENV KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+ENV KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT
+ENV KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT
 
-RUN mkdir -p /opt/lfh/kafka
-COPY --from=builder tmp/kafka /opt/lfh/kafka
+RUN mkdir -p ${APP_ROOT}/kafka
+COPY --from=builder tmp/kafka ${APP_ROOT}/kafka
+RUN chmod u+x ${APP_ROOT}/kafka/bin/lfh-kafka-start.sh
+RUN chown lfh:root -R ${APP_ROOT}/kafka
 
-# zookeeper
-EXPOSE 2181
+USER lfh
 
-# kafka broker
+# kafka broker 1
 EXPOSE 9092
 
-WORKDIR ${APP_ROOT}/kafka
+# kafka broker 2
+EXPOSE 9094
 
-CMD ["sh", "-c", "bin/zookeeper-server-start.sh -daemon config/zookeeper.properties && sleep ${STARTUP_INTERVAL} && bin/kafka-server-start.sh config/server.properties"]
+WORKDIR ${APP_ROOT}
+
+CMD ["sh", "-c", "${APP_ROOT}/kafka/bin/lfh-kafka-start.sh"]

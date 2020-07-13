@@ -26,6 +26,7 @@ ENV USER_ID=1001
 RUN mkdir -p ${APP_ROOT}
 RUN useradd -u ${USER_ID} -r -g 0 \
             -s /sbin/nologin \
-            -c "Default Application User" default
+            -c "Default LFH Application User" \
+            lfh
 
 RUN chown -R ${USER_ID}:0 ${APP_ROOT}
