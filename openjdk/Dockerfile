@@ -24,6 +24,6 @@ ENV USER_ID=$USER_ID
 ENV JAVA_HOME=/usr/lib/jvm/jre
 ENV JAVA_OPTIONS="-XX:+UseContainerSupport"
 
-ARG JDK_PACKAGE_NAME=java-11-openjdk    
+ARG JDK_PACKAGE_NAME=java-11-openjdk
 RUN microdnf install -y ${JDK_PACKAGE_NAME} && \
     microdnf clean all
