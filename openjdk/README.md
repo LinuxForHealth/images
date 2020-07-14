@@ -12,6 +12,6 @@ docker buildx build \
               --pull \
               --push \
               --platform linux/amd64,linux/s390x \
-              --build-arg JDK_PACKAGE_NAME=java-1.8.0-openjdk
+              --build-arg JDK_PACKAGE_NAME=java-1.8.0-openjdk \
               -t docker.io/linuxforhealth/openjdk:<image version> .
 ```
