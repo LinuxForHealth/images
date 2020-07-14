@@ -9,7 +9,6 @@
 #
 # Environment variables:
 # - APP_ROOT: The root application directory. Set in base image.
-# - USER_ID: The USER ID used for the non-privileged "application" account. Set in base image.
 # - JAVA_HOME: The Java installation directory. Set in base image.
 # - KAFKA_ZOOKEEPER_CONNECT: Specifies the Zookeeper host and port (maps to zookeeper.connect property)
 # - KAFKA_LISTENERS: Broker listening addresses (maps to listeners property)
@@ -40,7 +39,6 @@ LABEL summary="Kafka Standalone Deployment for Linux For Health"
 LABEL description="Provides a standalone deployment for non-production use"
 
 ENV APP_ROOT=${APP_ROOT}
-ENV USER_ID=${USER_ID}
 ENV JAVA_HOME=${JAVA_HOME}
 
 ENV KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
