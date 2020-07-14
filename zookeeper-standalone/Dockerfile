@@ -7,7 +7,6 @@
 #
 # Environment variables:
 # - APP_ROOT: The root application directory. Set in base image.
-# - USER_ID: The USER ID used for the non-privileged "application" account. Set in base image.
 # - JAVA_HOME: The Java installation directory. Set in base image.
 
 FROM docker.io/linuxforhealth/base:1.0.0  AS builder
@@ -35,7 +34,6 @@ LABEL summary="ZooKeeper Standalone Deployment for Linux For Health"
 LABEL description="Provides a standalone ZooKeeper deployment for non-production use"
 
 ENV APP_ROOT=${APP_ROOT}
-ENV USER_ID=${USER_ID}
 ENV JAVA_HOME=${JAVA_HOME}
 
 USER lfh

@@ -3,9 +3,6 @@
 #
 # Environment variables:
 # - APP_ROOT: The root application directory. Set in base image.
-# - USER_ID: The USER ID used for the non-privileged "application" account. Set in base image.
-# - JAVA_HOME: The Java installation directory. Set in base image.
-# - JAVA_OPTIONS: Java command line options used to configure the JVM. Set in base image.
 
 FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 LABEL maintainer="Linux for Health"
@@ -21,12 +18,11 @@ RUN microdnf update -y && \
     microdnf clean all
 
 ENV APP_ROOT=/opt/lfh
-ENV USER_ID=1001
 
 RUN mkdir -p ${APP_ROOT}
-RUN useradd -u ${USER_ID} -r -g 0 \
+RUN useradd -u 1001 -r -g 0 \
             -s /sbin/nologin \
-            -c "Default LFH Application User" \
+            -c "Linux for Health Application User" \
             lfh
 
-RUN chown -R ${USER_ID}:0 ${APP_ROOT}
+RUN chown -R lfh:0 ${APP_ROOT}
