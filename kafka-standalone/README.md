@@ -3,6 +3,7 @@
 The Linux for Health Kafka Standalone Image is intended for non-production use.
 
 ## Build Command
+
 ```
 docker buildx build \
               --pull \
