@@ -1,7 +1,9 @@
 # Linux for Health Base Image
+
 The Linux for Health Base Image provides a minimal OS with an application directory and non-privileged user.
 
 ## Build Command
+
 ```
 docker buildx build \
               --pull \
