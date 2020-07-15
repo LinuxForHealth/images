@@ -18,7 +18,7 @@ LABEL description="Provides support for Linux for Health Golang based applicatio
 ENV APP_ROOT=$APP_ROOT
 ENV GOPATH=$APP_ROOT/gocode
 
-RUN mkdir -p ${APP_ROOT}/gocode/{bin,pkg,src} && \
+RUN mkdir -p ${GOPATH}/{bin,pkg,src} && \
     chown -R lfh:root ${APP_ROOT}
 
 RUN microdnf install -y golang && \
