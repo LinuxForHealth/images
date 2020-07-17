@@ -9,7 +9,12 @@
 #
 # Environment variables:
 # - APP_ROOT: The root application directory. Set in base image.
-# - GOPATH: Sets the golang "workspace" for the image to the $APP_ROOT
+# - JAVA_HOME: The Java installation directory. Set in base image.
+# - KAFKA_ZOOKEEPER_CONNECT: Specifies the Zookeeper host and port (maps to zookeeper.connect property)
+# - KAFKA_LISTENERS: Broker listening addresses (maps to listeners property)
+# - KAFKA_ADVERTISED_LISTENERS:  The Kafka listener metadata passed back to clients (maps to advertised.listeners)
+# - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: Specifies the protocol used for each listener (maps to listener.security.protocol.map)
+# - KAFKA_INTER_BROKER_LISTENER_NAME:  The listener used for internal connections (inter.broker.listener.name)
 
 FROM docker.io/linuxforhealth/base:1.0.0  AS builder
 
