@@ -33,13 +33,10 @@ LABEL com.linuxforhealth.license_terms="https://www.apache.org/licenses/LICENSE-
 LABEL summary="ZooKeeper Standalone Deployment for Linux For Health"
 LABEL description="Provides a standalone ZooKeeper deployment for non-production use"
 
-ENV APP_ROOT=${APP_ROOT}
-ENV JAVA_HOME=${JAVA_HOME}
-
 USER lfh
 
-RUN mkdir -p /opt/lfh/zookeeper
-COPY --from=builder tmp/zookeeper /opt/lfh/zookeeper
+RUN mkdir -p ${APP_ROOT}/zookeeper
+COPY --from=builder tmp/zookeeper ${APP_ROOT}/zookeeper
 
 # zookeeper
 EXPOSE 2181

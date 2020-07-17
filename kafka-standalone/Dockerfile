@@ -9,12 +9,7 @@
 #
 # Environment variables:
 # - APP_ROOT: The root application directory. Set in base image.
-# - JAVA_HOME: The Java installation directory. Set in base image.
-# - KAFKA_ZOOKEEPER_CONNECT: Specifies the Zookeeper host and port (maps to zookeeper.connect property)
-# - KAFKA_LISTENERS: Broker listening addresses (maps to listeners property)
-# - KAFKA_ADVERTISED_LISTENERS:  The Kafka listener metadata passed back to clients (maps to advertised.listeners)
-# - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: Specifies the protocol used for each listener (maps to listener.security.protocol.map)
-# - KAFKA_INTER_BROKER_LISTENER_NAME:  The listener used for internal connections (inter.broker.listener.name)
+# - GOPATH: Sets the golang "workspace" for the image to the $APP_ROOT
 
 FROM docker.io/linuxforhealth/base:1.0.0  AS builder
 
@@ -38,9 +33,6 @@ LABEL com.linuxforhealth.license_terms="https://www.apache.org/licenses/LICENSE-
 LABEL summary="Kafka Standalone Deployment for Linux For Health"
 LABEL description="Provides a standalone deployment for non-production use"
 
-ENV APP_ROOT=${APP_ROOT}
-ENV JAVA_HOME=${JAVA_HOME}
-
 ENV KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
 ENV KAFKA_LISTENERS=PLAINTEXT://:9092
 ENV KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
@@ -54,11 +46,8 @@ RUN chown lfh:root -R ${APP_ROOT}/kafka
 
 USER lfh
 
-# kafka broker 1
-EXPOSE 9092
-
-# kafka broker 2
-EXPOSE 9094
+# kafka brokers 1
+EXPOSE 9092 9094
 
 WORKDIR ${APP_ROOT}
 

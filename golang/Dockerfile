@@ -3,7 +3,6 @@
 #
 # Environment variables:
 # - APP_ROOT: The root application directory. Set in base image.
-# - USER_ID: The USER ID used for the non-privileged "application" account. Set in base image.
 # - GOPATH: Sets the golang "workspace" for the image to the $APP_ROOT
 
 FROM docker.io/linuxforhealth/base:1.0.0 AS builder
@@ -15,7 +14,6 @@ LABEL com.linuxforhealth.license_terms="https://www.apache.org/licenses/LICENSE-
 LABEL summary="Linux For Health Golang Image"
 LABEL description="Provides support for Linux for Health Golang based applications"
 
-ENV APP_ROOT=$APP_ROOT
 ENV GOPATH=$APP_ROOT/gocode
 
 RUN mkdir -p ${GOPATH}/{bin,pkg,src} && \
