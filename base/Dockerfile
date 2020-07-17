@@ -2,7 +2,7 @@
 # Builds a base image for use by Linux for Health applications and services
 #
 # Environment variables:
-# - APP_ROOT: The root application directory. Set in base image.
+# - APP_ROOT: The root application directory.
 
 FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 LABEL maintainer="Linux for Health"

@@ -38,9 +38,6 @@ LABEL com.linuxforhealth.license_terms="https://www.apache.org/licenses/LICENSE-
 LABEL summary="Kafka Standalone Deployment for Linux For Health"
 LABEL description="Provides a standalone deployment for non-production use"
 
-ENV APP_ROOT=${APP_ROOT}
-ENV JAVA_HOME=${JAVA_HOME}
-
 ENV KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
 ENV KAFKA_LISTENERS=PLAINTEXT://:9092
 ENV KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
@@ -54,11 +51,8 @@ RUN chown lfh:root -R ${APP_ROOT}/kafka
 
 USER lfh
 
-# kafka broker 1
-EXPOSE 9092
-
-# kafka broker 2
-EXPOSE 9094
+# kafka brokers 1
+EXPOSE 9092 9094
 
 WORKDIR ${APP_ROOT}
 

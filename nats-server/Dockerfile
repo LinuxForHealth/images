@@ -1,10 +1,19 @@
+# Linux for Health nats-server iamge.
+#
+# This image provides nats-server node for non-production use.
+#
+# Build arguments:
+# - NATS_SERVER_REPOSITORY_URL: The nats-server git repo URL
+# - NATS_SERVER_RELEASE: The nats-server git release tag
+#
+# Environment variables:
+# - APP_ROOT: The root application directory. Set in base image.
+# - GOPATH: Sets the golang "workspace" for the image to the $APP_ROOT. Set in base image
+
 FROM docker.io/linuxforhealth/golang:1.13 AS builder
 
 ARG NATS_SERVER_REPOSITORY_URL=https://github.com/nats-io/nats-server.git
 ARG NATS_SERVER_RELEASE_TAG=v2.1.7
-
-ENV APP_ROOT=${APP_ROOT}
-ENV GOPATH=${GOPATH}
 
 RUN mkdir -p /tmp/nats-server
 RUN mkdir -p ${GOPATH}/{bin,pkg,src}
@@ -24,11 +33,11 @@ FROM docker.io/linuxforhealth/base:1.0.0
 
 RUN mkdir -p ${APP_ROOT}/nats
 
-COPY --from=builder /tmp/nats-server* /opt/lfh/nats/
+COPY --from=builder /tmp/nats-server* ${APP_ROOT}/nats/
 RUN chown -R lfh:root ${APP_ROOT}
 
 USER lfh
-WORKDIR /opt/lfh/nats
+WORKDIR ${APP_ROOT}/nats
 
 # Expose client, management, cluster and gateway ports
 EXPOSE 4222 8222 6222 5222
