@@ -8,7 +8,6 @@ The Linux for Health OpenJDK Image is used to support golang based applications 
 docker buildx build \
               --pull \
               --push \
-              --platform linux/amd64,linux/s390x \
+              --platform linux/amd64,linux/s390x,linux/arm64 \
               -t docker.io/linuxforhealth/golang:<image version> .
 ```
-

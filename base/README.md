@@ -8,6 +8,6 @@ The Linux for Health Base Image provides a minimal OS with an application direct
 docker buildx build \
               --pull \
               --push \
-              --platform linux/amd64,linux/s390x \
+              --platform linux/amd64,linux/s390x,linux/arm64 \
               -t docker.io/linuxforhealth/base:<image version> .
 ```

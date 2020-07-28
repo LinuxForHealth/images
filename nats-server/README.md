@@ -8,6 +8,6 @@ The Linux for Health NATS Server Image provides event notifications via message 
 docker buildx build \
               --pull \
               --push \
-              --platform linux/amd64,linux/s390x \
+              --platform linux/amd64,linux/s390x,linux/arm64 \
               -t docker.io/linuxforhealth/nats-server:<image version> .
 ```

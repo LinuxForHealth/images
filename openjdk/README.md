@@ -9,11 +9,21 @@ used to install the OpenJDK. Supported values include:
 - java-1.8.0-openjdk
 - java-11-openjdk (default)
 
+To build for JDK 1.8:
 ```
 docker buildx build \
               --pull \
               --push \
-              --platform linux/amd64,linux/s390x \
+              --platform linux/amd64,linux/s390x,linux/arm64 \
               --build-arg JDK_PACKAGE_NAME=java-1.8.0-openjdk \
+              -t docker.io/linuxforhealth/openjdk:<image version> .
+```
+
+To build for Java 11:
+```
+docker buildx build \
+              --pull \
+              --push \
+              --platform linux/amd64,linux/s390x,linux/arm64 \
               -t docker.io/linuxforhealth/openjdk:<image version> .
 ```
