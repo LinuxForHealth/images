@@ -8,7 +8,7 @@ The Linux for Health Kafka Standalone Image is intended for non-production use.
 docker buildx build \
               --pull \
               --push \
-              --platform linux/amd64,linux/s390x \
+              --platform linux/amd64,linux/s390x,linux/arm64 \
               -t docker.io/linuxforhealth/kafka-standalone:<image version> .
 ```
 

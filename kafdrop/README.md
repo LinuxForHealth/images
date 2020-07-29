@@ -8,6 +8,6 @@ The Linux for Health Kafdrop Image supports Obsidian Dynamic's [Kafdrop UI](http
 docker buildx build \
               --pull \
               --push \
-              --platform linux/amd64,linux/s390x \
+              --platform linux/amd64,linux/s390x,linux/arm64 \
               -t docker.io/linuxforhealth/kafdrop:latest .
 ```
