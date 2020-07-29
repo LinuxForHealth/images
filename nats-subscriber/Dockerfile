@@ -12,6 +12,13 @@
 
 FROM docker.io/linuxforhealth/base:1.0.0
 
+LABEL maintainer="Linux for Health"
+LABEL com.linuxforhealth.component="nats-subscriber-image"
+LABEL name="nats-subscriber-image"
+LABEL com.linuxforhealth.license_terms="https://www.apache.org/licenses/LICENSE-2.0"
+LABEL summary="Linux For Health NATS Subscriber Image"
+LABEL description="Provides messaging support for Linux for Health applications"
+
 RUN microdnf update -y && \
     microdnf install -y nodejs && \
     microdnf clean all

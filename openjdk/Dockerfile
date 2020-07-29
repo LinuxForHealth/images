@@ -16,7 +16,7 @@ LABEL com.linuxforhealth.component="jdk-image"
 LABEL name="jdk-image"
 LABEL com.linuxforhealth.license_terms="https://www.apache.org/licenses/LICENSE-2.0"
 LABEL summary="Linux For Health JDK Image"
-LABEL description="Provides support for Linux for HealthJDK based applications"
+LABEL description="Provides support for Linux for Health JDK-based applications"
 
 ENV JAVA_HOME=/usr/lib/jvm/jre
 ENV JAVA_OPTIONS="-XX:+UseContainerSupport"
