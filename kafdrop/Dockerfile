@@ -1,4 +1,4 @@
-# Linux for Health Kafdrop iamge.
+# Linux for Health Kafdrop image.
 #
 # This image servers Obsidian Dynamic's Kafdrop UI (https://github.com/obsidiandynamics/kafdrop) within a 
 # Red Hat UBI container.

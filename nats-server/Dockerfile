@@ -1,4 +1,4 @@
-# Linux for Health nats-server iamge.
+# Linux for Health nats-server image.
 #
 # This image provides nats-server node for non-production use.
 #
