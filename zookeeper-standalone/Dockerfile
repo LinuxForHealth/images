@@ -1,4 +1,4 @@
-# Linux for Health ZooKeeper "stand-alone" iamge.
+# Linux for Health ZooKeeper "stand-alone" image.
 #
 # This image provides a "stand-alone" ZooKeeper implementation for non-production use.
 #

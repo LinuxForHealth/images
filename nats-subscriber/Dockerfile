@@ -1,4 +1,4 @@
-# Linux for Health NATS subsciber image.
+# Linux for Health NATS subscriber image.
 #
 # This image provides a NATS subscriber that can receive NATS messages from a local or remote
 # Linux for Health instance.  

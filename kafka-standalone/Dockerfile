@@ -1,4 +1,4 @@
-# Linux for Health Kafka "stand-alone" iamge.
+# Linux for Health Kafka "stand-alone" image.
 #
 # This image provides a "stand-alone" Kafka implementation for non-production use.
 # Zookeeper is not bundled with this image. Zookeeper connection information is provided
