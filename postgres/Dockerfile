@@ -21,8 +21,7 @@ RUN dnf -y install ${POSTGRES_RELEASE_URL} && \
 USER postgres
 
 # Initialize data directory - e.g. /var/lib/pgsql/data/
-# RUN $(find /usr/pgsql*/bin -type d)/initdb ${PGDATA}
-RUN /usr/pgsql-12/bin/initdb ${PGDATA}
+RUN $(find /usr/pgsql*/bin -type d)/initdb ${PGDATA}
 
 # Allow remote connections to database
 RUN echo "host  all  all 0.0.0.0/0  trust" >> /var/lib/pgsql/data/pg_hba.conf
@@ -34,4 +33,4 @@ RUN echo "listen_addresses='*'" >> /var/lib/pgsql/data/postgresql.conf
 EXPOSE 5432
 
 # Start PostgreSQL when the container starts
-CMD ["/usr/pgsql-12/bin/postgres", "-D", "${PGDATA}", "-c", "config_file=/var/lib/pgsql/data/postgresql.conf"]
+CMD ["sh", "-c", "$(find /usr/pgsql*/bin -type d)/postgres", "-c", "config_file=/var/lib/pgsql/data/postgresql.conf"]
