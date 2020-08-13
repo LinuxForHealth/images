@@ -24,6 +24,17 @@ RUN apt -y clean && \
 
 COPY ./orthanc.json /etc/orthanc
 
+ENV APP_ROOT=/opt/lfh
+
+RUN mkdir -p ${APP_ROOT}
+
+RUN useradd -u 1001 -r -g 0 \
+            -s /sbin/nologin \
+            -c "Linux for Health Application User" \
+            lfh
+
+RUN chown -R lfh:0 ${APP_ROOT}
+
 VOLUME [ "/var/lib/orthanc/db-v6" ]
 EXPOSE 4242
 EXPOSE 8042
