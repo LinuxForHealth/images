@@ -8,7 +8,8 @@ Containers include:
 - [Golang](https://golang.org/) image to support Golang based applications
 - [Kafka](https://kafka.apache.org/) and [Zookeeper](https://zookeeper.apache.org/) for real time streaming and durable message persistence
 - [NATS](https://docs.nats.io/nats-streaming-concepts/intro) and a NATS subscriber for data streaming and events notifications
- 
+- [PostgreSQL](https://www.postgresql.org) for object-relational database use cases
+
 ## Multi-Architecture Build Process
 The build process leverages the multi-architecture features of build kit as provided through Docker's [buildx](https://docs.docker.com/buildx/working-with-buildx/) CLI.
 
@@ -16,6 +17,9 @@ Architectures supported include:
 - linux/amd64
 - linux/s390x
 - linux/arm64
+
+Architecture support exceptions:
+- The PostgreSQL image does not include support for linux/s390x or linux/arm64 at this time.
 
 Images are built using a command similar to:
 
