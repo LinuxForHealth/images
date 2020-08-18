@@ -25,4 +25,5 @@ RUN useradd -u 1001 -r -g 0 \
             -c "Linux for Health Application User" \
             lfh
 
-RUN chown -R lfh:0 ${APP_ROOT}
+RUN chgrp -R 0 ${APP_ROOT} && \
+    chmod -R g=u ${APP_ROOT}

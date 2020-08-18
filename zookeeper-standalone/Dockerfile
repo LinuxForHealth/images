@@ -33,10 +33,12 @@ LABEL com.linuxforhealth.license_terms="https://www.apache.org/licenses/LICENSE-
 LABEL summary="ZooKeeper Standalone Deployment for Linux For Health"
 LABEL description="Provides a standalone ZooKeeper deployment for non-production use"
 
-USER lfh
-
 RUN mkdir -p ${APP_ROOT}/zookeeper
 COPY --from=builder tmp/zookeeper ${APP_ROOT}/zookeeper
+RUN chgrp -R 0 ${APP_ROOT}/zookeeper && \
+    chmod -R g=u ${APP_ROOT}/zookeeper    
+
+USER lfh
 
 # zookeeper
 EXPOSE 2181

@@ -34,6 +34,10 @@ ENV LFH_NATS_SUBSCRIBER_PORT=4222
 ENV LFH_NATS_SUBSCRIBER_TOPIC=lfh-events
 
 RUN chown -R lfh:root ${APP_ROOT}
+
+RUN chgrp -R 0 ${APP_ROOT}/nats-subscriber && \
+    chmod -R g=u ${APP_ROOT}/nats-subscriber
+
 USER lfh
 
 ENTRYPOINT ["node"]

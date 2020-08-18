@@ -5,7 +5,7 @@
 # - APP_ROOT: The root application directory. Set in base image.
 # - GOPATH: Sets the golang "workspace" for the image to the $APP_ROOT
 
-FROM docker.io/linuxforhealth/base:1.0.0 AS builder
+FROM docker.io/linuxforhealth/base:1.0.0
 
 LABEL maintainer="Linux for Health"
 LABEL com.linuxforhealth.component="golang-image"
@@ -21,3 +21,6 @@ RUN mkdir -p ${GOPATH}/{bin,pkg,src} && \
 
 RUN microdnf install -y golang && \
     microdnf clean all
+
+RUN chgrp -R 0 ${APP_ROOT} && \
+    chmod -R g=u ${APP_ROOT}

@@ -36,6 +36,9 @@ RUN mkdir -p ${APP_ROOT}/nats
 COPY --from=builder /tmp/nats-server* ${APP_ROOT}/nats/
 RUN chown -R lfh:root ${APP_ROOT}
 
+RUN chgrp -R 0 ${APP_ROOT}/nats && \
+    chmod -R g=u ${APP_ROOT}/nats
+
 USER lfh
 WORKDIR ${APP_ROOT}/nats
 
