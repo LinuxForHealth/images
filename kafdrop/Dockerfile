@@ -30,4 +30,7 @@ RUN chgrp -R 0 ${APP_ROOT}/kafdrop && \
 
 USER lfh    
 
+# kafdrop http port
+EXPOSE 9000
+
 ENTRYPOINT ["./kafdrop.sh"]
