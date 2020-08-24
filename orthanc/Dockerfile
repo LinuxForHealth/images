@@ -24,20 +24,27 @@ RUN apt -y clean && \
 
 COPY ./orthanc.json /etc/orthanc
 
-ENV APP_ROOT=/opt/lfh
-
-RUN mkdir -p ${APP_ROOT}
-
 RUN useradd -u 1001 -r -g 0 \
             -s /sbin/nologin \
             -c "Linux for Health Application User" \
             lfh
 
-RUN chown -R lfh:0 ${APP_ROOT}
+RUN mkdir -p /var/lib/orthanc/db-v6            
+
+RUN chown -R lfh:0 /etc/orthanc && \
+    chown -R lfh:0 /var/lib/orthanc/db-v6
+
+RUN chgrp -R 0 /etc/orthanc && \
+    chmod -R g=u /etc/orthanc 
+
+RUN chgrp -R 0 /var/lib/orthanc/db-v6 && \
+    chmod -R g=u /var/lib/orthanc/db-v6
+
+USER lfh
 
 VOLUME [ "/var/lib/orthanc/db-v6" ]
-EXPOSE 4242
-EXPOSE 8042
+
+EXPOSE 4242 8042
 
 ENV TZ=America/New_York
 

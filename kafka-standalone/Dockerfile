@@ -49,6 +49,9 @@ COPY --from=builder tmp/kafka ${APP_ROOT}/kafka
 RUN chmod u+x ${APP_ROOT}/kafka/bin/lfh-kafka-start.sh
 RUN chown lfh:root -R ${APP_ROOT}/kafka
 
+RUN chgrp -R 0 ${APP_ROOT}/kafka && \
+    chmod -R g=u ${APP_ROOT}/kafka    
+
 USER lfh
 
 # kafka brokers 1

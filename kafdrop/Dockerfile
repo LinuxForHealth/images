@@ -25,4 +25,12 @@ RUN cp kafdrop.sh kafdrop.tmp && cat kafdrop.tmp | head -n -1 > kafdrop.sh && rm
 
 RUN echo 'exec java ${ARGS} -jar '"${APP_ROOT}"'/kafdrop/kafdrop*jar ${CMD_ARGS}' >> kafdrop.sh
 
+RUN chgrp -R 0 ${APP_ROOT}/kafdrop && \
+    chmod -R g=u ${APP_ROOT}/kafdrop
+
+USER lfh    
+
+# kafdrop http port
+EXPOSE 9000
+
 ENTRYPOINT ["./kafdrop.sh"]
