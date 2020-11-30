@@ -28,7 +28,7 @@
   // in the storage (a value of "0" indicates no limit on the number
   // of patients)
   "MaximumPatientCount" : 0,
-  
+
   // List of paths to the custom Lua scripts that are to be loaded
   // into this instance of Orthanc
   "LuaScripts" : [
@@ -126,11 +126,11 @@
   "RemoteAccessAllowed" : true,
 
   // Whether or not SSL is enabled
-  "SslEnabled" : false,
+  "SslEnabled" : true,
 
   // Path to the SSL certificate in the PEM format (meaningful only if
   // SSL is enabled)
-  "SslCertificate" : "certificate.pem",
+  "SslCertificate" : "/etc/orthanc/orthanc-server.pem",
 
   // Whether or not the password protection is enabled
   "AuthenticationEnabled" : true,
@@ -139,7 +139,6 @@
   // Basic Authentication, the passwords are stored as plain text.
   "RegisteredUsers" : {
     "orthanc" : "orthanc"
-    // "alice" : "alicePassword"
   },
 
 
@@ -162,7 +161,7 @@
      * A fourth parameter is available to enable patches for
      * specific PACS manufacturers. The allowed values are currently:
      * - "Generic" (default value),
-     * - "GenericNoWildcardInDates" (to replace "*" by "" in date fields 
+     * - "GenericNoWildcardInDates" (to replace "*" by "" in date fields
      *   in outgoing C-Find requests originating from Orthanc)
      * - "GenericNoUniversalWildcard" (to replace "*" by "" in all fields
      *   in outgoing C-Find SCU requests originating from Orthanc)
@@ -339,7 +338,7 @@
        "Verbose" : true
      }
    **/
-  
+
   // If set to "true", Orthanc will still handle "SOP Classes in
   // Study" (0008,0062) in C-FIND requests, even if the "SOP Class
   // UID" metadata is not available in the database (which is the case

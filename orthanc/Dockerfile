@@ -23,6 +23,7 @@ RUN apt -y clean && \
     apt -y install orthanc
 
 COPY ./orthanc.json /etc/orthanc
+COPY ./orthanc-server.pem /etc/orthanc
 
 RUN useradd -u 1001 -r -g 0 \
             -s /sbin/nologin \
