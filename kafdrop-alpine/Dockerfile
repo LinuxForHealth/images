@@ -9,7 +9,7 @@
 
 FROM docker.io/obsidiandynamics/kafdrop:latest AS builder
 
-FROM docker.io/ccorley/openjdk-alpine:11
+FROM docker.io/linuxforhealth/openjdk-alpine:11
 
 COPY --from=builder /kafdrop.sh ${APP_ROOT}/kafdrop/
 COPY --from=builder /kafdrop*/kafdrop*.jar ${APP_ROOT}/kafdrop/

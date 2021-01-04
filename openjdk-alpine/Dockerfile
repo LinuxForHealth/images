@@ -9,7 +9,7 @@
 # - JAVA_HOME: The Java installation directory
 # - JAVA_OPTIONS: Java command line options used to configure the JVM. Defaults to include the UseContainerSupport options
 
-FROM docker.io/ccorley/base-alpine:1.0.0
+FROM docker.io/linuxforhealth/base-alpine:1.0.0
 
 LABEL maintainer="Linux for Health"
 LABEL com.linuxforhealth.component="jdk-image"
