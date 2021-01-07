@@ -18,7 +18,7 @@ LABEL com.linuxforhealth.license_terms="https://www.apache.org/licenses/LICENSE-
 LABEL summary="Linux For Health JDK Alpine Image"
 LABEL description="Provides support for Alpine Linux for Health JDK-based applications"
 
-ENV JAVA_HOME=/usr/bin/java
+ENV JAVA_HOME=/usr
 ENV JAVA_OPTIONS="-XX:+UseContainerSupport"
 
 ARG JDK_PACKAGE_NAME=openjdk11-jre-headless
