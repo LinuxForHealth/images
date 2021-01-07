@@ -9,7 +9,7 @@ docker buildx build \
               --pull \
               --push \
               --platform linux/amd64,linux/s390x,linux/arm64 \
-              -t docker.io/linuxforhealth/kafka-standalone:<image version> .
+              -t docker.io/linuxforhealth/kafka-alpine:<image version> .
 ```
 
 ## Environment Variables
