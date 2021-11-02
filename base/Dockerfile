@@ -4,25 +4,24 @@
 # Environment variables:
 # - APP_ROOT: The root application directory.
 
-FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
+FROM alpine:3.14.2
 LABEL maintainer="Linux for Health"
 LABEL com.linuxforhealth.component="base-image"
 LABEL name="base-image"
 LABEL com.linuxforhealth.license_terms="https://www.apache.org/licenses/LICENSE-2.0"
 LABEL summary="Linux For Health Base Image"
-LABEL description="RHEL UBI 8 Minimal Image Used for LFH Base Image"
+LABEL description="Alpine Image Used for LFH Base Image"
 
-RUN microdnf update -y && \
-    microdnf install -y shadow-utils \
-    ca-certificates && \
-    microdnf clean all
+RUN apk update && \
+    apk add bash
 
 ENV APP_ROOT=/opt/lfh
 
 RUN mkdir -p ${APP_ROOT}
-RUN useradd -u 1001 -r -g 0 \
-            -s /sbin/nologin \
-            -c "Linux for Health Application User" \
+RUN adduser -D --uid 1001 \
+            --system \
+            --shell /sbin/nologin \
+            --ingroup root \
             lfh
 
 RUN chgrp -R 0 ${APP_ROOT} && \

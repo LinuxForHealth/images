@@ -1,4 +1,4 @@
-# Linux for Health OpenJDK Image
+# LinuxForHealth OpenJDK Image
 # Builds an image for use  by OpenJDK applications
 #
 # Build arguments:
@@ -9,18 +9,18 @@
 # - JAVA_HOME: The Java installation directory
 # - JAVA_OPTIONS: Java command line options used to configure the JVM. Defaults to include the UseContainerSupport options
 
-FROM docker.io/linuxforhealth/base:1.0.0
+FROM docker.io/linuxforhealth/base:1.0.0-alpine-3.14.2
 
 LABEL maintainer="Linux for Health"
 LABEL com.linuxforhealth.component="jdk-image"
 LABEL name="jdk-image"
 LABEL com.linuxforhealth.license_terms="https://www.apache.org/licenses/LICENSE-2.0"
-LABEL summary="Linux For Health JDK Image"
-LABEL description="Provides support for Linux for Health JDK-based applications"
+LABEL summary="Linux For Health JDK Alpine Image"
+LABEL description="Provides support for Alpine Linux for Health JDK-based applications"
 
-ENV JAVA_HOME=/usr/lib/jvm/jre
+ENV JAVA_HOME=/usr
 ENV JAVA_OPTIONS="-XX:+UseContainerSupport"
 
-ARG JDK_PACKAGE_NAME=java-11-openjdk
-RUN microdnf install -y ${JDK_PACKAGE_NAME} && \
-    microdnf clean all
+ARG JDK_PACKAGE_NAME=openjdk11-jre-headless
+RUN apk add -U ${JDK_PACKAGE_NAME} && \
+    rm -rf /var/lib/apt/lists/*
