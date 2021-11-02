@@ -4,7 +4,7 @@
 # Environment variables:
 # - APP_ROOT: The root application directory.
 
-FROM alpine:3.12.1
+FROM alpine:3.14.2
 LABEL maintainer="Linux for Health"
 LABEL com.linuxforhealth.component="base-image"
 LABEL name="base-image"

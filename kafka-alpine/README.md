@@ -1,6 +1,6 @@
-# Linux for Health Kafka Standalone Image
+# LinuxForHealth Kafka Image
 
-The Linux for Health Kafka Standalone Image is intended for non-production use.
+The LinuxForHealth Kafka Image provides data storage for LinuxForHealth connect nodes. 
 
 ## Build Command
 
@@ -9,7 +9,7 @@ docker buildx build \
               --pull \
               --push \
               --platform linux/amd64,linux/s390x,linux/arm64 \
-              -t docker.io/linuxforhealth/kafka-alpine:<image version> .
+              -t docker.io/linuxforhealth/kafka:<kafka version>-alpine:<alpine version> .
 ```
 
 ## Environment Variables

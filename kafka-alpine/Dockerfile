@@ -1,8 +1,8 @@
-# Linux for Health Kafka "stand-alone" image.
+# LinuxForHealth Kafka image.
 #
-# This image provides a "stand-alone" Kafka implementation for non-production use.
-# Zookeeper is not bundled with this image. Zookeeper connection information is provided
-# via the KAFKA_ZOOKEEPER_CONNECT environment variable.
+# The LinuxForHealth Kafka Image provides data storage for LinuxForHealth connect nodes.
+# 
+# Zookeeper (not bundled) is configured using the KAFKA_ZOOKEEPER_CONNECT environment variable.
 #
 # Build arguments:
 # - KAFKA_RELEASE_URL: The URL for the target Kafka release
@@ -16,9 +16,9 @@
 # - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: Specifies the protocol used for each listener (maps to listener.security.protocol.map)
 # - KAFKA_INTER_BROKER_LISTENER_NAME:  The listener used for internal connections (inter.broker.listener.name)
 
-FROM docker.io/linuxforhealth/base-alpine:1.0.0  AS builder
+FROM docker.io/linuxforhealth/base:1.0.0-alpine-3.14.2  AS builder
 
-ARG KAFKA_RELEASE_URL=https://apache.osuosl.org/kafka/2.5.0/kafka_2.12-2.5.0.tgz
+ARG KAFKA_RELEASE_URL=https://apache.osuosl.org/kafka/3.0.0/kafka_2.13-3.0.0.tgz
 
 RUN apk add -U wget tar gzip && \
     rm -rf /var/lib/apt/lists/*
@@ -29,14 +29,14 @@ RUN wget ${KAFKA_RELEASE_URL} -O /tmp/kafka.tgz && \
     tar -xzf kafka.tgz -C kafka --strip-components 1
 COPY lfh-kafka-start.sh /tmp/kafka/bin
 
-FROM docker.io/linuxforhealth/openjdk-alpine:11
+FROM docker.io/linuxforhealth/openjdk:11-alpine-3.14.2
 
-LABEL maintainer="Linux for Health"
-LABEL com.linuxforhealth.component="kafka-standalone"
-LABEL name="kafka-standalone"
+LABEL maintainer="LinuxForHealth"
+LABEL com.linuxforhealth.component="kafka"
+LABEL name="LinuxForHealth Kafka Alpine"
 LABEL com.linuxforhealth.license_terms="https://www.apache.org/licenses/LICENSE-2.0"
-LABEL summary="Kafka Standalone Deployment for Linux For Health"
-LABEL description="Provides a standalone deployment for non-production use"
+LABEL summary="LinuxForHealth Kafka Alpine Image"
+LABEL description="Provides data storage for LinuxForHealth connect nodes"
 
 ENV KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
 ENV KAFKA_LISTENERS=PLAINTEXT://:9092
@@ -53,7 +53,7 @@ RUN chmod u+x ${APP_ROOT}/kafka/bin/lfh-kafka-start.sh && \
 
 USER lfh
 
-# kafka brokers 1
+# kafka brokers
 EXPOSE 9092 9094
 
 WORKDIR ${APP_ROOT}

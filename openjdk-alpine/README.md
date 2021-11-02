@@ -1,6 +1,6 @@
-# Linux for Health OpenJDK Image
+# LinuxForHealth OpenJDK Image
 
-The Linux for Health OpenJDK Image supports java-based applications and services.
+The LinuxForHealth OpenJDK Image supports java-based applications and services.
 
 ## Build Command
 
@@ -15,7 +15,7 @@ docker buildx build \
               --push \
               --platform linux/amd64,linux/s390x,linux/arm64 \
               --build-arg JDK_PACKAGE_NAME=openjdk8-jre \
-              -t docker.io/linuxforhealth/openjdk-alpine:<image version> .
+              -t docker.io/linuxforhealth/openjdk:<jdk version>-alpine-<alpine version> .
 ```
 
 To build for Java 11:
@@ -24,5 +24,5 @@ docker buildx build \
               --pull \
               --push \
               --platform linux/amd64,linux/s390x,linux/arm64 \
-              -t docker.io/linuxforhealth/openjdk-alpine:<image version> .
+              -t docker.io/linuxforhealth/openjdk:<jdk version>-alpine-<alpine version> .
 ```
